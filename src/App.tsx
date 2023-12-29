@@ -7,7 +7,7 @@ import API from './services/apiService';
 function App() {
 	const [template, setTemplate] = useState(TEMPLATE[0]);
 	const [listTemplate, setListTemplate] = useState(TEMPLATE);
-	const [profile, setProfile] = useState();
+	const [profile, setProfile] = useState<{avatar: string, id: string}| any>();
 
 	useEffect(() => {
 		handleGetProfile();
@@ -131,7 +131,7 @@ function App() {
 	};
 
 	const constantContent = useMemo(() => {
-		const information = profile;
+		const information = profile
 		if (!information) {
 			return;
 		}
@@ -142,7 +142,7 @@ function App() {
 						if (domNode.attribs?.id === 'avatar') {
 							domNode.attribs = {
 								...domNode.attribs,
-								src: information?.avatar,
+								src: information?.avatar ?? "",
 							};
 						} else {
 							domNode.children = [
